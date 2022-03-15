@@ -64,8 +64,11 @@ def detail(request, question_id):
     # Http404 if the list is empty.
 
 def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
+    # Version 1: very simple
+    # response = "You're looking at the results of question %s."
+    # return HttpResponse(response % question_id)
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/results.html', {'question': question })
 
 def vote(request, question_id):
     # Version 1: very simple
