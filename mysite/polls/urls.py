@@ -12,8 +12,6 @@ app_name = 'polls'
 urlpatterns = [
     # ex: /polls/
     path('', views.index, name='index'),
-    # ex: /polls/wow
-    # path('wow', views.wow, name='wowpage'),
     # ex: /polls/5/
     # The 'name' value as called by the {% url %} template tag.
     # And we added the word 'specifics'

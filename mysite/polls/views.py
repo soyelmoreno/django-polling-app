@@ -38,9 +38,6 @@ def index(request):
     return render(request, 'polls/index.html', context)
 
 
-def wow(request):
-    return HttpResponse("Wow, it works. You're at the polls Wow page.")
-
 def detail(request, question_id):
     # Version 1: very simple
     # return HttpResponse("You're looking at question %s." % question_id)
