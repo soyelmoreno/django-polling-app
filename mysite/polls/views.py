@@ -58,6 +58,10 @@ def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/detail.html', {'question': question})
 
+    # Note: There's also a get_list_or_404() function, which works just as
+    # get_object_or_404() – except using filter() instead of get(). It raises
+    # Http404 if the list is empty.
+
 def results(request, question_id):
     response = "You're looking at the results of question %s."
     return HttpResponse(response % question_id)
