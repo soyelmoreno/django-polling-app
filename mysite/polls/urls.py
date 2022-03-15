@@ -8,7 +8,9 @@ urlpatterns = [
     # ex: /polls/wow
     # path('wow', views.wow, name='wowpage'),
     # ex: /polls/5/
-    path('<int:question_id>/', views.detail, name='detail'),
+    # The 'name' value as called by the {% url %} template tag.
+    # And we added the word 'specifics'
+    path('specifics/<int:question_id>/', views.detail, name='detail'),
     # ex: /polls/5/results
     path('<int:question_id>/results', views.results, name='results'),
     # ex: /polls/5/vote/
