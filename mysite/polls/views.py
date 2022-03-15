@@ -2,8 +2,23 @@
 
 from django.http import HttpResponse
 
+from .models import Question
+
+# Each view is responsible for doing one of two things: returning an
+# HttpResponse object containing the content for the requested page, or raising
+# an exception such as Http404. The rest is up to you.
+
+# Your view can read records from a database, or not. It can use a template
+# system such as Django's – or a third-party Python template system – or not. It
+# can generate a PDF file, output XML, create a ZIP file on the fly, anything
+# you want, using whatever Python libraries you want. All Django wants is that
+# HttpResponse. Or an exception.
+
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    output = ', '.join([q.question_text for q in latest_question_list])
+    return HttpResponse(output)
+    # return HttpResponse("Hello, world. You're at the polls index.")
 
 def wow(request):
     return HttpResponse("Wow, it works. You're at the polls Wow page.")
