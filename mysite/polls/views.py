@@ -1,5 +1,4 @@
-from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from django.http import HttpResponse
 # from django.template import loader
@@ -34,7 +33,7 @@ def index(request):
     # return HttpResponse(template.render(context, request))
 
     # Version 4:
-    # Use the render shortcut (now we don't need `loader` or `HttpResponse`)
+    # Use the `render` shortcut (now we don't need `loader` or `HttpResponse`)
     return render(request, 'polls/index.html', context)
 
 
@@ -46,12 +45,17 @@ def detail(request, question_id):
     # return HttpResponse("You're looking at question %s." % question_id)
 
     # Version 2:
-    # Use the render shortcut to render the template with the context
+    # Use the `render` shortcut to render the template with the context
     # And raise an exception if that question id doesn't exist.
-    try:
-        question = Question.objects.get(pk=question_id)
-    except Question.DoesNotExist:
-        raise Http404("Question does not exist")
+    # try:
+    #     question = Question.objects.get(pk=question_id)
+    # except Question.DoesNotExist:
+    #     raise Http404("Question does not exist")
+    # return render(request, 'polls/detail.html', {'question': question})
+
+    # Version 3:
+    # Use the `get_object_or_404` shortcut to do all of that, then render.
+    question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/detail.html', {'question': question})
 
 def results(request, question_id):
