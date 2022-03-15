@@ -1,7 +1,7 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 
 from django.http import HttpResponse
-from django.template import loader
+# from django.template import loader
 
 from .models import Question
 
@@ -16,15 +16,25 @@ from .models import Question
 # HttpResponse. Or an exception.
 
 def index(request):
+    # Version 1: very simple
     # return HttpResponse("Hello, world. You're at the polls index.")
+
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    context = {'latest_question_list': latest_question_list}
+
+    # Version 2:
+    # Could join into a comma-separated array and just return that:
     # output = ', '.join([q.question_text for q in latest_question_list])
     # return HttpResponse(output)
-    template = loader.get_template('polls/index.html')
-    context = {
-        'latest_question_list': latest_question_list,
-    }
-    return HttpResponse(template.render(context, request))
+
+    # Version 3:
+    # Load a template file, call its render() method with the context
+    # template = loader.get_template('polls/index.html')
+    # return HttpResponse(template.render(context, request))
+
+    # Version 4:
+    # Use the render shortcut (now we don't need `loader` or `HttpResponse`)
+    return render(request, 'polls/index.html', context)
 
 
 def wow(request):
