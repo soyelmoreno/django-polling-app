@@ -2,6 +2,13 @@ from django.urls import path
 
 from . import views
 
+# Q: In real Django projects there might be five, ten, twenty apps. How does
+# Django know which app view to create for a url when using the {% url %}
+# template tag (e.g, more than one app might have a `detail` view)?
+#
+# A: Add namespaces to your URLconf. In the polls/urls.py file, add an app_name
+# to set the application namespace:
+app_name = 'polls'
 urlpatterns = [
     # ex: /polls/
     path('', views.index, name='index'),
